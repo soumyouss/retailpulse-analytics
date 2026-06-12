@@ -1,0 +1,57 @@
+version: 2
+
+sources:
+  - name: raw
+    database: retailpulse
+    schema: raw
+    description: "Données brutes chargées depuis les systèmes sources"
+
+    tables:
+      - name: raw_customers
+        description: "Clients de la plateforme e-commerce"
+        columns:
+          - name: customer_id
+            data_tests: [unique, not_null]
+          - name: email
+            data_tests: [unique]
+
+      - name: raw_products
+        description: "Catalogue produits"
+        columns:
+          - name: product_id
+            data_tests: [unique, not_null]
+
+      - name: raw_campaigns
+        description: "Campagnes marketing"
+        columns:
+          - name: campaign_id
+            data_tests: [unique, not_null]
+
+      - name: raw_orders
+        description: "Commandes clients"
+        columns:
+          - name: order_id
+            data_tests: [unique, not_null]
+          - name: status
+            data_tests:
+              - accepted_values:
+                  arguments:
+                    values: ['completed', 'cancelled', 'pending', 'refunded']
+
+      - name: raw_order_items
+        description: "Lignes de commande"
+        columns:
+          - name: item_id
+            data_tests: [unique, not_null]
+
+      - name: raw_sessions
+        description: "Sessions web"
+        columns:
+          - name: session_id
+            data_tests: [unique, not_null]
+
+      - name: raw_refunds
+        description: "Remboursements"
+        columns:
+          - name: refund_id
+            data_tests: [unique, not_null]
