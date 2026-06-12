@@ -1,3 +1,4 @@
+-- fct_orders : table de faits des commandes RetailPulse
 {{
     config(
         materialized='incremental',
