@@ -1,3 +1,6 @@
+import os
+
+from dotenv import load_dotenv
 import pandas as pd
 import numpy as np
 from faker import Faker
@@ -9,11 +12,13 @@ fake = Faker()
 np.random.seed(42)
 random.seed(42)
 
+load_dotenv()
+
 # ─── CONFIG SNOWFLAKE ────────────────────────────────────────────
 conn = snowflake.connector.connect(
-    account   = 'OVSQMPE-VN96123',
-    user      = 'dbt_user',
-    password  = 'RetailPulse2024!',
+    account   = os.environ.get('SNOWFLAKE_ACCOUNT'),
+    user      = os.environ.get('SNOWFLAKE_USER'),
+    password  = os.environ.get('SNOWFLAKE_PASSWORD'),
     warehouse = 'retailpulse_wh',
     database  = 'retailpulse',
     schema    = 'raw',
